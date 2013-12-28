@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<link rel="stylesheet" href="mapTest.css">
+  </head>
+  <body>
+  <div id="main">
+	<ul id="menu_wrap" class="Black">
+		<li class="button"><a href="index.html">Home</a></li>
+		<li class="button"><a href="map.html">Map</a></li>
+		<li class="button"><a href="stats.html">Stats</a></li>
+		<li class="button"><a href="targets.html">Targets</a></li> 
+	</ul>
+	<div id="basic-stats">
+	<ul>
+	</ul>
+	</div>
+  </div>
+  </body>
+</html>
+
+<script>
+$("#list").bind ("click", function (event)
+{
+  db.transaction (function (transaction) 
+  {
+    var sql = "SELECT * FROM targets";
+    transaction.executeSql (sql, undefined, 
+    function (transaction, result)
+    {
+      var html = "<ul>";
+      if (result.rows.length)
+      {
+        for (var i = 0; i < result.rows.length; i++) 
+        {
+          var row = result.rows.item (i);
+          var lname = row.lname;
+          var fname = row.fname;
+          html += "<li>" + lname + "&nbsp;" + fname + "</li>";
+        }
+      }
+      else
+      {
+        html += "<li> No targets </li>";
+      }
+      
+      html += "</ul>";
+      
+      $("#win2").unbind ().bind ("pagebeforeshow", function ()
+      {
+        var $content = $("#win2 div:jqmData(role=content)");
+        $content.html (html);
+        var $ul = $content.find ("ul");
+        $ul.listview ();
+      });
+      
+      $.mobile.changePage ($("#win2"));
+      
+    }, error);
+  });
+});
+</script>

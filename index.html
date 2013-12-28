@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<link rel="stylesheet" href="mapTest.css">
+	 <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkRz3TLQt2NKh9pFmteTBc0RepOdxNjrM&sensor=false">
+    </script>
+    <script type="text/javascript">
+      function initialize() {
+	    var myLatlng = new google.maps.LatLng(50.877, 4.7);
+        var mapOptions = {
+          center: myLatlng,
+          zoom: 13
+        };
+        var map = new google.maps.Map(document.getElementById("map-canvas-home"), mapOptions);
+		var marker = new google.maps.Marker(
+		{
+			position: myLatlng,
+			map: map,
+			title: 'current position'
+		}
+		);
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+  </head>
+  <body>
+  <div id="main">
+	<ul id="menu_wrap" class="Black">
+		<li class="button"><a href="index.html">Home</a></li>
+		<li class="button"><a href="map.html">Map</a></li>
+		<li class="button"><a href="stats.html">Stats</a></li>
+		<li class="button"><a href="targets.html">Targets</a></li> 
+	</ul>
+	<div id="basic-stats">
+	<ul>
+		<li>Most visited:   </li><img src="line.png" alt="line placeholder"></img>
+		<li>Last Visited:   </li><img src="line.png" alt="line placeholder"></img>
+		<li>Closest target: </li><img src="line.png" alt="line placeholder"></img>
+	</ul>
+	</div>
+    <div id="map-canvas-home"/>
+  </div>
+  </body>
+</html>
